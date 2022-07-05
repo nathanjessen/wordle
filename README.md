@@ -1,5 +1,5 @@
-# wordle
-Wordle built with React and Daisyui
+# wordl
+Wordl built with React and Daisyui
 
 ## Available Scripts
 
