@@ -18,8 +18,6 @@
   },
   "scripts": {
     "build:tailwind": "tailwindcss build -i src/styles/tailwind.css -o src/styles/tailwind.output.css",
-    "prestart": "npm run build:tailwind",
-    "prebuild": "npm run build:tailwind",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

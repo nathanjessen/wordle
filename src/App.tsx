@@ -1,4 +1,4 @@
-import './styles/tailwind.output.css';
+import './styles/tailwind.css';
 import GamePage from './pages/GamePage';
 
 function App() {
