@@ -1,11 +1,12 @@
 # wordle
 
-Wordle game built with React and Daisyui
+Wordle game built with React and DaisyUI
 
 ## Environments
 
-Storybook docs are deployed to the docs branch using a GitHub action workflow.
-The production ready app is deployed using [https://vercel.com](Vercel).
+Storybook docs are deployed to the docs branch using a GitHub action workflow. They can be viewed at [https://nathanjessen.com/wordle/](https://nathanjessen.com/wordle/).
+
+The production app is deployed to [https://wordle.nathanjessen.com/](https://wordle.nathanjessen.com/) using [https://vercel.com](Vercel).
 
 ## Available Scripts
 
