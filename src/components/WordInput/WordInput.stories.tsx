@@ -12,7 +12,7 @@ const Template: Story<IWordInput> = (args) => <WordInput {...args} />;
 export const Default = Template.bind({});
 Default.args = {};
 
-export const OnGuess = Template.bind({});
-OnGuess.args = {
-  onGuess: (val: string) => alert(val),
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true,
 };

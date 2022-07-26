@@ -7,7 +7,7 @@ export interface IWordInput {
 
 export const WordInput = ({
   onGuess,
-  disabled = true,
+  disabled = false,
 }: IWordInput) => {
   const [val, setVal] = useState<string>('');
 
