@@ -1,16 +1,21 @@
-import { useEffect, useState } from 'react';
-import { API_WORDLE } from '../../constants';
+import { useCallback, useEffect, useState } from 'react';
+import { WORDS_API } from '../../constants';
 import LetterGrid from '../../components/LetterGrid';
 import { TColor, TLine } from '../../typings';
 import WordInput from '../../components/WordInput';
+import API from '../../lib/API';
+
+const api = new API();
 
 export const GamePage = () => {
+  // List of all possible words
+  const [wordlist, setWordlist] = useState<string[]>([]);
   // Word to be guessed
   const [solution, setSolution] = useState<string>('');
   // Length of word being guessed
-  const [wordLen, setWordLen] = useState<number>(5);
+  const wordLen: number = 5;
   // How many attempts are they allowed
-  const [attempts, setAttempts] = useState<number>(6);
+  const attempts: number = 6;
   // Current attempt
   const [guess, setGuess] = useState<string>('');
   // All attempts
@@ -18,51 +23,55 @@ export const GamePage = () => {
   // Whether or not game is complete
   const [isGameComplete, setIsGameComplete] = useState<boolean>(false);
 
+  const getRandomWord = () => {
+    const randomInt = Math.floor(Math.random() * wordlist.length);
+    const newWord = wordlist[randomInt];
+    if (newWord) {
+      setSolution(newWord);
+    }
+  };
+
+  /**
+   * Get word list and choose random word
+   */
   useEffect(() => {
     const controller = new AbortController();
 
-    const getWord = async () => {
-      const response = await fetch(`${API_WORDLE}?length=${wordLen}`, {
+    const getWords = async () => {
+      const response = await api.get(WORDS_API, {
         signal: controller.signal,
-      });
-      const words: Array<string> = await response.json();
-      setSolution(words[0]);
-      setWordLen(words[0].length);
-      setAttempts(6);
+      })
+        .then(res => res.json());
+      const randomInt = Math.floor(Math.random() * response.length);
+
+      setWordlist(response);
+      setSolution(response[randomInt]);
     };
 
-    getWord();
+    getWords();
 
     return () => controller?.abort();
   }, []);
 
-  useEffect(() => {
-    const newLine = getLetters();
-    if (newLine.length) {
-      setLines(prevLines => [...prevLines, newLine]);
-    }
-  }, [guess]);
+  /**
+  * Converts a word into UI friendly tile objects
+  * @param {String} word to convert to tiles
+  */
+  const convertToLetters = useCallback((word: string) => {
+    const solutionCharArr = solution.split('');
+    const wordCharArr = word.split('');
 
-  useEffect(() => {
-    if (solution.length > 0 && (lines.length === attempts || guess === solution)) {
-      setIsGameComplete(true);
-    }
-  }, [lines]);
-
-  const getLetters = (): TLine => {
-    const abc = solution.split('');
-    const xyz = guess.split('');
-    let result: TLine = xyz.map((letter, idx) => {
+    const newLine: TLine = wordCharArr.map((letter, idx) => {
       let color: TColor = "base";
 
-      if (letter === abc[idx]) {
+      if (letter === solutionCharArr[idx]) {
         // Answer revealed early
         if (isGameComplete) {
           color = "info";
         } else {
           color = "success";
         }
-      } else if (solution.indexOf(letter) > 0) {
+      } else if (solution.indexOf(letter) >= 0) {
         color = "warning";
       } else {
         color = "neutral";
@@ -73,12 +82,33 @@ export const GamePage = () => {
         color: color,
       };
     });
-    return result;
-  };
+
+    if (newLine.length) {
+      setLines(prevLines => [...prevLines, newLine]);
+    }
+  }, [solution, isGameComplete]);
+
+  useEffect(() => {
+    if (solution.length > 0 && (lines.length === attempts || guess === solution)) {
+      setIsGameComplete(true);
+    }
+  }, [guess, lines, solution]);
 
   const onGuess = (val: string) => {
-    if (val.length === wordLen) {
-      setGuess(val);
+    // Verify word exists in dictionary
+    if (wordlist.indexOf(val) >= 0) {
+      // And word is the desired length
+      if (val.length === wordLen) {
+        setGuess(val);
+        convertToLetters(val);
+      } else {
+
+        alert(`${val} is the wrong length.`);
+      }
+    }
+    // User entered an unknown word
+    else {
+      alert(`${val} isn't in our list of accepted words.`);
     }
   };
 
@@ -88,11 +118,15 @@ export const GamePage = () => {
   };
 
   const onRestart = () => {
-    window.location.reload();
+    // window.location.reload();
+    setGuess('');
+    setLines([]);
+    setIsGameComplete(false);
+    getRandomWord();
   };
 
   return (
-    <div className="max-w-lg mx-auto space-y-4 h-screen flex flex-col justify-center">
+    <div className="max-w-lg mx-auto p-8 space-y-4 flex flex-col justify-center">
       <WordInput onGuess={onGuess} disabled={isGameComplete} />
       <LetterGrid lines={lines} cols={wordLen} rows={attempts} />
 
