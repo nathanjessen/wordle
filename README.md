@@ -1,5 +1,11 @@
-# wordl
-Wordl built with React and Daisyui
+# wordle
+
+Wordle game built with React and Daisyui
+
+## Environments
+
+Storybook docs are deployed to the docs branch using a GitHub action workflow.
+The production ready app is deployed using [https://vercel.com](Vercel).
 
 ## Available Scripts
 
