@@ -1,8 +1,8 @@
-import { Story, Meta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import { GamePage } from './GamePage';
 
 export default {
-  title: "Pages/Wordle",
+  title: 'Pages/Wordle',
   component: GamePage,
 } as Meta;
 

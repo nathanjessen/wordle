@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
-import { WORDS_API } from '../../constants';
 import LetterGrid from '../../components/LetterGrid';
-import { TColor, TLine } from '../../typings';
 import WordInput from '../../components/WordInput';
+import { WORDS_API } from '../../constants';
 import API from '../../lib/API';
+import { TColor, TLine } from '../../typings';
 
 const api = new API();
 
@@ -38,10 +38,11 @@ export const GamePage = () => {
     const controller = new AbortController();
 
     const getWords = async () => {
-      const response = await api.get(WORDS_API, {
-        signal: controller.signal,
-      })
-        .then(res => res.json());
+      const response = await api
+        .get(WORDS_API, {
+          signal: controller.signal,
+        })
+        .then((res) => res.json());
       const randomInt = Math.floor(Math.random() * response.length);
 
       setWordlist(response);
@@ -54,42 +55,48 @@ export const GamePage = () => {
   }, []);
 
   /**
-  * Converts a word into UI friendly tile objects
-  * @param {String} word to convert to tiles
-  */
-  const convertToLetters = useCallback((word: string) => {
-    const solutionCharArr = solution.split('');
-    const wordCharArr = word.split('');
+   * Converts a word into UI friendly tile objects
+   * @param {String} word to convert to tiles
+   */
+  const convertToLetters = useCallback(
+    (word: string) => {
+      const solutionCharArr = solution.split('');
+      const wordCharArr = word.split('');
 
-    const newLine: TLine = wordCharArr.map((letter, idx) => {
-      let color: TColor = "base";
+      const newLine: TLine = wordCharArr.map((letter, idx) => {
+        let color: TColor = 'base';
 
-      if (letter === solutionCharArr[idx]) {
-        // Answer revealed early
-        if (isGameComplete) {
-          color = "info";
+        if (letter === solutionCharArr[idx]) {
+          // Answer revealed early
+          if (isGameComplete) {
+            color = 'info';
+          } else {
+            color = 'success';
+          }
+        } else if (solution.indexOf(letter) >= 0) {
+          color = 'warning';
         } else {
-          color = "success";
+          color = 'neutral';
         }
-      } else if (solution.indexOf(letter) >= 0) {
-        color = "warning";
-      } else {
-        color = "neutral";
+
+        return {
+          char: letter,
+          color: color,
+        };
+      });
+
+      if (newLine.length) {
+        setLines((prevLines) => [...prevLines, newLine]);
       }
-
-      return {
-        char: letter,
-        color: color,
-      };
-    });
-
-    if (newLine.length) {
-      setLines(prevLines => [...prevLines, newLine]);
-    }
-  }, [solution, isGameComplete]);
+    },
+    [solution, isGameComplete]
+  );
 
   useEffect(() => {
-    if (solution.length > 0 && (lines.length === attempts || guess === solution)) {
+    if (
+      solution.length > 0 &&
+      (lines.length === attempts || guess === solution)
+    ) {
       setIsGameComplete(true);
     }
   }, [guess, lines, solution]);
@@ -102,7 +109,6 @@ export const GamePage = () => {
         setGuess(val);
         convertToLetters(val);
       } else {
-
         alert(`${val} is the wrong length.`);
       }
     }
@@ -126,19 +132,19 @@ export const GamePage = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-8 space-y-4 flex flex-col justify-center">
+    <div className='max-w-lg mx-auto p-8 space-y-4 flex flex-col justify-center'>
       <WordInput onGuess={onGuess} disabled={isGameComplete} />
       <LetterGrid lines={lines} cols={wordLen} rows={attempts} />
 
       {isGameComplete ? (
         <>
-          <p className="text-center">Solution: {solution}</p>
-          <button className="btn btn-secondary" onClick={onRestart}>
+          <p className='text-center'>Solution: {solution}</p>
+          <button className='btn btn-secondary' onClick={onRestart}>
             Restart
           </button>
         </>
       ) : (
-        <button className="btn btn-primary" onClick={onRevealAnswer}>
+        <button className='btn btn-primary' onClick={onRevealAnswer}>
           Show Solution
         </button>
       )}

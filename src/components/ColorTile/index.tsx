@@ -1,2 +1,2 @@
-import { ColorTile } from "./ColorTile";
+import { ColorTile } from './ColorTile';
 export default ColorTile;

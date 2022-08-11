@@ -1,2 +1,2 @@
-import { WordInput } from "./WordInput";
+import { WordInput } from './WordInput';
 export default WordInput;

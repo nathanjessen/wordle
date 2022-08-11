@@ -1,2 +1,2 @@
-import { LetterGrid } from "./LetterGrid";
+import { LetterGrid } from './LetterGrid';
 export default LetterGrid;

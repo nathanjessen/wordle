@@ -1,5 +1,5 @@
-import { TLine } from "../../typings";
-import WordLine from "../WordLine";
+import { TLine } from '../../typings';
+import WordLine from '../WordLine';
 
 export interface ILetterGrid {
   lines?: Array<TLine>;

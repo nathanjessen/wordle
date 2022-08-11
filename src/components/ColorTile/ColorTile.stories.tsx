@@ -1,14 +1,16 @@
-import { Story, Meta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 
 import { PropsWithChildren } from 'react';
 import { ColorTile, IColorTile } from './ColorTile';
 
 export default {
-  title: "Wordle/ColorTile",
+  title: 'Wordle/ColorTile',
   component: ColorTile,
 } as Meta;
 
-const Template: Story<PropsWithChildren<IColorTile>> = (args) => <ColorTile {...args} />;
+const Template: Story<PropsWithChildren<IColorTile>> = (args) => (
+  <ColorTile {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {};

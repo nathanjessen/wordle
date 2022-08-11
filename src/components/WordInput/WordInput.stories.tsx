@@ -1,9 +1,9 @@
-import { Story, Meta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 
-import { WordInput, IWordInput } from './WordInput';
+import { IWordInput, WordInput } from './WordInput';
 
 export default {
-  title: "Wordle/WordInput",
+  title: 'Wordle/WordInput',
   component: WordInput,
 } as Meta;
 
