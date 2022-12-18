@@ -1,40 +1,39 @@
-import { Meta, Story } from '@storybook/react';
-
-import { PropsWithChildren } from 'react';
-import { ColorTile, IColorTile } from './ColorTile';
+import { Meta } from '@storybook/react';
+import { ColorTile } from './ColorTile';
 
 export default {
   title: 'Wordle/ColorTile',
   component: ColorTile,
 } as Meta;
 
-const Template: Story<PropsWithChildren<IColorTile>> = (args) => (
-  <ColorTile {...args} />
-);
-
-export const Default = Template.bind({});
-Default.args = {};
-
-export const Neutral = Template.bind({});
-Neutral.args = {
-  children: 'a',
-  color: 'neutral',
+export const Default = {
+  args: {},
 };
 
-export const Info = Template.bind({});
-Info.args = {
-  children: 'a',
-  color: 'info',
+export const Neutral = {
+  args: {
+    children: 'a',
+    color: 'neutral',
+  },
 };
 
-export const Warning = Template.bind({});
-Warning.args = {
-  children: 'a',
-  color: 'warning',
+export const Info = {
+  args: {
+    children: 'a',
+    color: 'info',
+  },
 };
 
-export const Success = Template.bind({});
-Success.args = {
-  children: 'a',
-  color: 'success',
+export const Warning = {
+  args: {
+    children: 'a',
+    color: 'warning',
+  },
+};
+
+export const Success = {
+  args: {
+    children: 'a',
+    color: 'success',
+  },
 };

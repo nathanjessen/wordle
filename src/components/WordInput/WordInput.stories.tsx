@@ -1,18 +1,17 @@
-import { Meta, Story } from '@storybook/react';
-
-import { IWordInput, WordInput } from './WordInput';
+import { Meta } from '@storybook/react';
+import { WordInput } from './WordInput';
 
 export default {
   title: 'Wordle/WordInput',
   component: WordInput,
 } as Meta;
 
-const Template: Story<IWordInput> = (args) => <WordInput {...args} />;
+export const Default = {
+  args: {},
+};
 
-export const Default = Template.bind({});
-Default.args = {};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  disabled: true,
+export const Disabled = {
+  args: {
+    disabled: true,
+  },
 };

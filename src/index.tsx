@@ -1,18 +1,26 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
+const container = document.getElementById('root') as HTMLElement;
+const root = createRoot(container);
+
 if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('./mocks/browser');
-  worker.start();
+  import('./mocks/browser')
+    .then(({ worker }) => {
+      worker.start();
+    })
+    .then(() => {
+      root.render(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      );
+    });
+} else {
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 }
-
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);

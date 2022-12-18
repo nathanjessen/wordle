@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { GamePage } from './GamePage';
 
 export default {
@@ -6,7 +6,6 @@ export default {
   component: GamePage,
 } as Meta;
 
-const Template: Story = (args) => <GamePage {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  args: {},
+};
