@@ -56,7 +56,7 @@
     "@storybook/jest": "^0.0.10",
     "@storybook/node-logger": "^7.0.0-beta.12",
     "@storybook/react": "^7.0.0-beta.12",
-    "@storybook/react-vite": "^7.0.0-alpha.25",
+    "@storybook/react-vite": "^7.0.0-beta.12",
     "@storybook/testing-library": "^0.0.14-next.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
