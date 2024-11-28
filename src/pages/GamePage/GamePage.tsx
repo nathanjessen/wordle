@@ -13,7 +13,7 @@ export const GamePage = () => {
   // Word to be guessed
   const [solution, setSolution] = useState<string>('');
   // Length of word being guessed
-  const wordLen: number = 5;
+  const wordLen = solution.length || 5;
   // How many attempts are they allowed
   const attempts: number = 6;
   // Current attempt
