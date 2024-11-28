@@ -1,18 +1,47 @@
 # wordle
 
-Wordle game built with React and DaisyUI
+A Wordle clone built with React and DaisyUI. Challenge yourself to guess the hidden word in this engaging word puzzle game.
 
-This project uses [Vite](https://vitejs.dev/).
+## 🚀 Live Demo
 
-## Environments
+- **Game**: [https://wordle.nathanjessen.com/](https://wordle.nathanjessen.com/)
+- **Storybook**: [https://nathanjessen.com/wordle/](https://nathanjessen.com/wordle/)
 
-Storybook docs are deployed to the docs branch using a GitHub action workflow. They can be viewed at [https://nathanjessen.com/wordle/](https://nathanjessen.com/wordle/).
+## 🛠️ Tech Stack
 
-The production app is deployed to [https://wordle.nathanjessen.com/](https://wordle.nathanjessen.com/) using [https://vercel.com](Vercel).
+- [React](https://reactjs.org/) - UI Framework
+- [Vite](https://vitejs.dev/) - Build Tool
+- [TypeScript](https://www.typescriptlang.org/) - Language
+- [DaisyUI](https://daisyui.com/) - Component Library
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [Storybook](https://storybook.js.org/) - Component Development
 
-## Available Scripts
+## 🏗️ Development
 
-In the project directory, you can run:
+### Prerequisites
+
+- Node.js 20.9.0 or higher
+- npm 10.1.0 or higher
+
+### Getting Started
+
+1. Clone the repository
+```bash
+git clone https://github.com/nathanjessen/wordle.git
+cd wordle
+```
+
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Start the development server
+```bash
+npm run dev
+```
+
+## 📜 Available Scripts
 
 ### `npm run dev`
 
@@ -35,3 +64,13 @@ Start the Storybook dev server for building components in isolation.
 ### `npm run build-storybook`
 
 Builds the storybook app for production.
+
+## 🚀 Deployment
+
+The application is deployed using [Vercel](https://vercel.com). The production app is available at [https://wordle.nathanjessen.com/](https://wordle.nathanjessen.com/).
+
+Storybook documentation is automatically deployed to the docs branch using GitHub Actions and can be viewed at [https://nathanjessen.com/wordle/](https://nathanjessen.com/wordle/).
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
