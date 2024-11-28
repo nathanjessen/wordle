@@ -36,22 +36,34 @@ export const GamePage = () => {
    */
   useEffect(() => {
     const controller = new AbortController();
+    let isSubscribed = true;
 
     const getWords = async () => {
-      const response = await api
-        .get(WORDS_API, {
+      try {
+        const response = await api.get(WORDS_API, {
           signal: controller.signal,
-        })
-        .then((res) => res.json());
-      const randomInt = Math.floor(Math.random() * response.length);
-
-      setWordlist(response);
-      setSolution(response[randomInt]);
+        });
+        const data = await response.json();
+        
+        if (isSubscribed && data.length > 0) {
+          const randomInt = Math.floor(Math.random() * data.length);
+          setWordlist(data);
+          setSolution(data[randomInt]);
+        }
+      } catch (error) {
+        // Only log errors that aren't from aborting
+        if (error instanceof Error && error.name !== 'AbortError') {
+          console.error('Error fetching words:', error);
+        }
+      }
     };
 
     getWords();
 
-    return () => controller?.abort();
+    return () => {
+      isSubscribed = false;
+      controller.abort();
+    };
   }, []);
 
   /**
