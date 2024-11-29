@@ -1,6 +1,6 @@
 # wordle
 
-A Wordle clone built with React and DaisyUI. Challenge yourself to guess the hidden word in this engaging word puzzle game.
+A Wordle clone built with React and Tailwind CSS. Challenge yourself to guess the hidden word in this engaging word puzzle game.
 
 ## 🚀 Live Demo
 
@@ -12,7 +12,6 @@ A Wordle clone built with React and DaisyUI. Challenge yourself to guess the hid
 - [React](https://reactjs.org/) - UI Framework
 - [Vite](https://vitejs.dev/) - Build Tool
 - [TypeScript](https://www.typescriptlang.org/) - Language
-- [DaisyUI](https://daisyui.com/) - Component Library
 - [Tailwind CSS](https://tailwindcss.com/) - Styling
 - [Storybook](https://storybook.js.org/) - Component Development
 

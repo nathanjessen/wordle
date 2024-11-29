@@ -151,12 +151,18 @@ export const GamePage = () => {
       {isGameComplete ? (
         <>
           <p className='text-center'>Solution: {solution}</p>
-          <button className='btn btn-secondary' onClick={onRestart}>
+          <button 
+            className='px-4 py-2 bg-wordle-absent text-white rounded-lg hover:bg-opacity-90 transition-colors' 
+            onClick={onRestart}
+          >
             Restart
           </button>
         </>
       ) : (
-        <button className='btn btn-primary' onClick={onRevealAnswer}>
+        <button 
+          className='px-4 py-2 bg-wordle-correct text-white rounded-lg hover:bg-opacity-90 transition-colors' 
+          onClick={onRevealAnswer}
+        >
           Show Solution
         </button>
       )}
