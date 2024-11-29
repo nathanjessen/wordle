@@ -1,473 +1,189 @@
-import { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { LetterGrid } from './LetterGrid';
+import { TLine } from '../../typings';
 
-export default {
+const meta: Meta<typeof LetterGrid> = {
   title: 'Wordle/LetterGrid',
   component: LetterGrid,
-} as Meta;
-
-export const Default = {
-  args: {},
-};
-
-export const FourCols = {
-  args: {
-    cols: 4,
+  parameters: {
+    componentSubtitle: 'Grid display for word guesses',
+  },
+  argTypes: {
+    lines: {
+      control: 'object',
+      description: 'Array of word lines with color states',
+      table: {
+        type: { summary: 'TLine[]' },
+        defaultValue: { summary: '[]' },
+      },
+    },
+    currentLine: {
+      control: { type: 'number', min: 0, max: 6 },
+      description: 'Index of current active line',
+      table: {
+        type: { summary: 'number' },
+        defaultValue: { summary: '0' },
+      },
+    },
+    wordLength: {
+      control: { type: 'number', min: 1, max: 10 },
+      description: 'Length of word to guess',
+      table: {
+        type: { summary: 'number' },
+        defaultValue: { summary: '5' },
+      },
+    },
+    maxAttempts: {
+      control: { type: 'number', min: 1, max: 10 },
+      description: 'Maximum number of attempts allowed',
+      table: {
+        type: { summary: 'number' },
+        defaultValue: { summary: '6' },
+      },
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: "''" },
+      },
+    },
   },
 };
 
-export const SixCols = {
+export default meta;
+type Story = StoryObj<typeof LetterGrid>;
+
+// Empty grid
+export const Empty: Story = {
   args: {
-    cols: 6,
+    lines: [],
+    currentLine: 0,
+    wordLength: 5,
+    maxAttempts: 6,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Empty grid at game start.',
+      },
+    },
   },
 };
 
-export const FourRows = {
-  args: {
-    rows: 4,
-  },
-};
-
-export const SixRows = {
-  args: {
-    rows: 6,
-  },
-};
-
-export const SingleLineAttempt = {
+// First guess
+export const FirstGuess: Story = {
   args: {
     lines: [
       [
-        {
-          char: 's',
-          color: 'neutral',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-        {
-          char: 'a',
-          color: 'neutral',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
+        { char: 'R', color: 'success' },
+        { char: 'E', color: 'warning' },
+        { char: 'A', color: 'neutral' },
+        { char: 'C', color: 'neutral' },
+        { char: 'T', color: 'warning' },
       ],
     ],
+    currentLine: 1,
+    wordLength: 5,
+    maxAttempts: 6,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Grid showing first guess result.',
+      },
+    },
   },
 };
 
-export const TwoLineAttempts = {
+// Multiple guesses
+export const MultipleGuesses: Story = {
   args: {
     lines: [
       [
-        {
-          char: 's',
-          color: 'neutral',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-        {
-          char: 'a',
-          color: 'neutral',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
+        { char: 'R', color: 'success' },
+        { char: 'E', color: 'warning' },
+        { char: 'A', color: 'neutral' },
+        { char: 'C', color: 'neutral' },
+        { char: 'T', color: 'warning' },
       ],
       [
-        {
-          char: 'g',
-          color: 'success',
-        },
-        {
-          char: 'r',
-          color: 'success',
-        },
-        {
-          char: 'o',
-          color: 'success',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
+        { char: 'S', color: 'neutral' },
+        { char: 'T', color: 'warning' },
+        { char: 'A', color: 'success' },
+        { char: 'R', color: 'neutral' },
+        { char: 'T', color: 'success' },
+      ],
+      [
+        { char: 'T', color: 'success' },
+        { char: 'R', color: 'success' },
+        { char: 'A', color: 'success' },
+        { char: 'C', color: 'success' },
+        { char: 'T', color: 'success' },
       ],
     ],
+    currentLine: 3,
+    wordLength: 5,
+    maxAttempts: 6,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Grid with multiple guesses, including a winning guess.',
+      },
+    },
   },
 };
 
-export const ThreeLineAttempts = {
+// Custom word length
+export const CustomLength: Story = {
   args: {
     lines: [
       [
-        {
-          char: 's',
-          color: 'neutral',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-        {
-          char: 'a',
-          color: 'neutral',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-      ],
-      [
-        {
-          char: 'g',
-          color: 'success',
-        },
-        {
-          char: 'r',
-          color: 'success',
-        },
-        {
-          char: 'o',
-          color: 'success',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-      ],
-      [
-        {
-          char: 'g',
-          color: 'success',
-        },
-        {
-          char: 'r',
-          color: 'success',
-        },
-        {
-          char: 'o',
-          color: 'success',
-        },
-        {
-          char: 'u',
-          color: 'success',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
+        { char: 'W', color: 'success' },
+        { char: 'O', color: 'success' },
+        { char: 'R', color: 'success' },
+        { char: 'D', color: 'success' },
+        { char: 'L', color: 'success' },
+        { char: 'E', color: 'success' },
       ],
     ],
+    currentLine: 1,
+    wordLength: 6,
+    maxAttempts: 6,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Grid with custom word length of 6.',
+      },
+    },
   },
 };
 
-export const FourLineAttempts = {
+// Dark theme
+export const DarkTheme: Story = {
   args: {
     lines: [
       [
-        {
-          char: 's',
-          color: 'neutral',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-        {
-          char: 'a',
-          color: 'neutral',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-      ],
-      [
-        {
-          char: 'g',
-          color: 'success',
-        },
-        {
-          char: 'r',
-          color: 'success',
-        },
-        {
-          char: 'o',
-          color: 'success',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-      ],
-      [
-        {
-          char: 'g',
-          color: 'success',
-        },
-        {
-          char: 'r',
-          color: 'success',
-        },
-        {
-          char: 'o',
-          color: 'success',
-        },
-        {
-          char: 'u',
-          color: 'success',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-      ],
-      [
-        {
-          char: 'g',
-          color: 'success',
-        },
-        {
-          char: 'r',
-          color: 'success',
-        },
-        {
-          char: 'o',
-          color: 'success',
-        },
-        {
-          char: 'u',
-          color: 'success',
-        },
-        {
-          char: 'm',
-          color: 'neutral',
-        },
+        { char: 'R', color: 'success' },
+        { char: 'E', color: 'warning' },
+        { char: 'A', color: 'neutral' },
+        { char: 'C', color: 'neutral' },
+        { char: 'T', color: 'warning' },
       ],
     ],
+    currentLine: 1,
+    wordLength: 5,
+    maxAttempts: 6,
   },
-};
-
-export const FiveLineAttempts = {
-  args: {
-    lines: [
-      [
-        {
-          char: 's',
-          color: 'neutral',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-        {
-          char: 'a',
-          color: 'neutral',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-      ],
-      [
-        {
-          char: 'g',
-          color: 'success',
-        },
-        {
-          char: 'r',
-          color: 'success',
-        },
-        {
-          char: 'o',
-          color: 'success',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-      ],
-      [
-        {
-          char: 'g',
-          color: 'success',
-        },
-        {
-          char: 'r',
-          color: 'success',
-        },
-        {
-          char: 'o',
-          color: 'success',
-        },
-        {
-          char: 'u',
-          color: 'success',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-      ],
-      [
-        {
-          char: 'g',
-          color: 'success',
-        },
-        {
-          char: 'r',
-          color: 'success',
-        },
-        {
-          char: 'o',
-          color: 'success',
-        },
-        {
-          char: 'u',
-          color: 'success',
-        },
-        {
-          char: 'm',
-          color: 'neutral',
-        },
-      ],
-      [
-        {
-          char: 'g',
-          color: 'success',
-        },
-        {
-          char: 'r',
-          color: 'success',
-        },
-        {
-          char: 'o',
-          color: 'success',
-        },
-        {
-          char: 'u',
-          color: 'success',
-        },
-        {
-          char: 'p',
-          color: 'success',
-        },
-      ],
-    ],
-  },
-};
-
-export const EarlyReveal = {
-  args: {
-    lines: [
-      [
-        {
-          char: 's',
-          color: 'neutral',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-        {
-          char: 'a',
-          color: 'neutral',
-        },
-        {
-          char: 't',
-          color: 'neutral',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-      ],
-      [
-        {
-          char: 'g',
-          color: 'success',
-        },
-        {
-          char: 'r',
-          color: 'success',
-        },
-        {
-          char: 'o',
-          color: 'success',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-        {
-          char: 's',
-          color: 'neutral',
-        },
-      ],
-      [
-        {
-          char: 'g',
-          color: 'info',
-        },
-        {
-          char: 'r',
-          color: 'info',
-        },
-        {
-          char: 'o',
-          color: 'info',
-        },
-        {
-          char: 'u',
-          color: 'info',
-        },
-        {
-          char: 't',
-          color: 'info',
-        },
-      ],
-    ],
+  parameters: {
+    backgrounds: { default: 'dark' },
+    docs: {
+      description: {
+        story: 'Grid appearance in dark theme.',
+      },
+    },
   },
 };

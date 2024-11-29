@@ -1,145 +1,186 @@
-import { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { WordLine } from './WordLine';
+import { TLine } from '../../typings';
 
-export default {
+const meta: Meta<typeof WordLine> = {
   title: 'Wordle/WordLine',
   component: WordLine,
-} as Meta;
-
-export const Empty = {
-  args: {},
-};
-
-export const SingleItem = {
-  args: {
-    items: [
-      {
-        char: 'a',
-        color: 'success',
+  parameters: {
+    componentSubtitle: 'A line component that displays a word guess',
+  },
+  argTypes: {
+    items: {
+      control: 'object',
+      description: 'Array of letter items with color states',
+      table: {
+        type: { summary: 'Array<{ char: string; color: TColor } | null>' },
+        defaultValue: { summary: '[]' },
       },
-    ],
+    },
+    length: {
+      control: { type: 'number', min: 1, max: 10 },
+      description: 'Length of the word line',
+      table: {
+        type: { summary: 'number' },
+        defaultValue: { summary: '5' },
+      },
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: "''" },
+      },
+    },
+    style: {
+      control: 'object',
+      description: 'Additional CSS styles',
+      table: {
+        type: { summary: 'CSSProperties' },
+        defaultValue: { summary: '{}' },
+      },
+    },
   },
 };
 
-export const ItemAndNulls = {
+export default meta;
+type Story = StoryObj<typeof WordLine>;
+
+// Empty line
+export const Empty: Story = {
   args: {
-    items: [
-      {
-        char: 'a',
-        color: 'base',
+    items: [],
+    length: 5,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Empty line with default spacing.',
       },
-      null,
-      null,
-      null,
-      null,
-    ],
+    },
   },
 };
 
-export const FullWord = {
+// Partial word
+export const PartialWord: Story = {
   args: {
     items: [
-      {
-        char: 't',
-        color: 'base',
-      },
-      {
-        char: 'e',
-        color: 'base',
-      },
-      {
-        char: 'n',
-        color: 'base',
-      },
-      {
-        char: 't',
-        color: 'base',
-      },
-      {
-        char: 's',
-        color: 'base',
-      },
+      { char: 'R', color: 'base' },
+      { char: 'E', color: 'base' },
     ],
+    length: 5,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Line with partial word entered.',
+      },
+    },
   },
 };
 
-export const ValidatedWord = {
+// Complete word - all correct
+export const CompleteCorrect: Story = {
   args: {
     items: [
-      {
-        char: 't',
-        color: 'success',
-      },
-      {
-        char: 'e',
-        color: 'neutral',
-      },
-      {
-        char: 'n',
-        color: 'neutral',
-      },
-      {
-        char: 't',
-        color: 'warning',
-      },
-      {
-        char: 's',
-        color: 'warning',
-      },
+      { char: 'R', color: 'success' },
+      { char: 'E', color: 'success' },
+      { char: 'A', color: 'success' },
+      { char: 'C', color: 'success' },
+      { char: 'T', color: 'success' },
     ],
+    length: 5,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Line with all letters correct.',
+      },
+    },
   },
 };
 
-export const CorrectWord = {
+// Complete word - mixed results
+export const CompleteMixed: Story = {
   args: {
     items: [
-      {
-        char: 't',
-        color: 'success',
-      },
-      {
-        char: 'r',
-        color: 'success',
-      },
-      {
-        char: 'u',
-        color: 'success',
-      },
-      {
-        char: 's',
-        color: 'success',
-      },
-      {
-        char: 't',
-        color: 'success',
-      },
+      { char: 'S', color: 'neutral' },
+      { char: 'T', color: 'warning' },
+      { char: 'A', color: 'success' },
+      { char: 'R', color: 'neutral' },
+      { char: 'T', color: 'success' },
     ],
+    length: 5,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Line with mixed letter results.',
+      },
+    },
   },
 };
 
-export const SolutionRevealed = {
+// Custom spacing
+export const CustomSpacing: Story = {
   args: {
     items: [
-      {
-        char: 't',
-        color: 'info',
-      },
-      {
-        char: 'r',
-        color: 'info',
-      },
-      {
-        char: 'u',
-        color: 'info',
-      },
-      {
-        char: 's',
-        color: 'info',
-      },
-      {
-        char: 't',
-        color: 'info',
-      },
+      { char: 'W', color: 'success' },
+      { char: 'O', color: 'success' },
+      { char: 'R', color: 'success' },
+      { char: 'D', color: 'success' },
     ],
+    length: 4,
+    className: 'gap-4',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Line with custom gap spacing between tiles.',
+      },
+    },
+  },
+};
+
+// Custom size
+export const CustomSize: Story = {
+  args: {
+    items: [
+      { char: 'B', color: 'success' },
+      { char: 'I', color: 'success' },
+      { char: 'G', color: 'success' },
+    ],
+    length: 3,
+    style: { transform: 'scale(1.2)' },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Line with scaled-up tiles.',
+      },
+    },
+  },
+};
+
+// Dark theme
+export const DarkTheme: Story = {
+  args: {
+    items: [
+      { char: 'N', color: 'success' },
+      { char: 'I', color: 'warning' },
+      { char: 'G', color: 'neutral' },
+      { char: 'H', color: 'success' },
+      { char: 'T', color: 'warning' },
+    ],
+    length: 5,
+  },
+  parameters: {
+    backgrounds: { default: 'dark' },
+    docs: {
+      description: {
+        story: 'Line appearance in dark theme.',
+      },
+    },
   },
 };
