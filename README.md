@@ -5,7 +5,7 @@ A Wordle clone built with React and Tailwind CSS. Challenge yourself to guess th
 ## 🚀 Live Demo
 
 - **Game**: [https://wordle.nathanjessen.com/](https://wordle.nathanjessen.com/)
-- **Storybook**: [https://nathanjessen.com/wordle/](https://nathanjessen.com/wordle/)
+- **Storybook**: [https://nathanjessen.github.io/wordle/](https://nathanjessen.github.io/wordle/)
 
 ## 🛠️ Tech Stack
 
@@ -68,7 +68,7 @@ Builds the storybook app for production.
 
 The application is deployed using [Vercel](https://vercel.com). The production app is available at [https://wordle.nathanjessen.com/](https://wordle.nathanjessen.com/).
 
-Storybook documentation is automatically deployed to the docs branch using GitHub Actions and can be viewed at [https://nathanjessen.com/wordle/](https://nathanjessen.com/wordle/).
+Storybook documentation is automatically deployed to the docs branch using GitHub Actions and can be viewed at [https://nathanjessen.github.io/wordle/](https://nathanjessen.github.io/wordle/).
 
 ## 📝 License
 
