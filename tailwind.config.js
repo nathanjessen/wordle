@@ -9,9 +9,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'wordle-correct': '#78a760',      // Muted green
-        'wordle-present': '#d4b256',      // Warm yellow
-        'wordle-absent': '#8b7355',       // Medium brown
+        'wordle-correct': {
+          DEFAULT: '#78a760',      // Muted green
+          dark: '#4a7f46'          // Dark mode green
+        },
+        'wordle-present': {
+          DEFAULT: '#d4b256',      // Warm yellow
+          dark: '#b59446'          // Dark mode yellow
+        },
+        'wordle-absent': {
+          DEFAULT: '#8b7355',      // Medium brown
+          dark: '#3a4149'          // Dark mode gray
+        },
         'tile-border': '#c4b5a2',         // Light brown border
         'key-bg': '#e6ddd1',              // Light beige
         'key-text': '#2d241c',            // Dark brown

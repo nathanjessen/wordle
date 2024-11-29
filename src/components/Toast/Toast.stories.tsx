@@ -1,11 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Toast } from './Toast';
+import type { ToastType } from './Toast';
+
+interface ToastProps {
+  message: string;
+  type: ToastType;
+  duration?: number;
+  onClose: () => void;
+}
 
 const meta: Meta<typeof Toast> = {
   title: 'Wordle/Toast',
   component: Toast,
   parameters: {
     componentSubtitle: 'Toast notification component for game messages',
+    docs: {
+      description: {
+        component: 'A toast notification component that automatically dismisses itself after a specified duration. Supports success, error, and info message types with appropriate icons.',
+      },
+    },
   },
   argTypes: {
     message: {
@@ -13,65 +26,49 @@ const meta: Meta<typeof Toast> = {
       description: 'Message to display in the toast',
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: "''" },
       },
     },
     type: {
       control: 'select',
-      options: ['success', 'error', 'info', 'warning'],
+      options: ['success', 'error', 'info'],
       description: 'Type of toast message',
       table: {
-        type: { summary: "'success' | 'error' | 'info' | 'warning'" },
-        defaultValue: { summary: "'info'" },
+        type: { summary: "'success' | 'error' | 'info'" },
       },
     },
     duration: {
-      control: { type: 'number', min: 0, max: 10000, step: 500 },
+      control: { type: 'number', min: 1000, max: 10000, step: 500 },
       description: 'Duration in milliseconds before toast auto-dismisses',
       table: {
         type: { summary: 'number' },
         defaultValue: { summary: '3000' },
       },
     },
-    visible: {
-      control: 'boolean',
-      description: 'Whether the toast is visible',
-      table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
-    },
-    onDismiss: {
+    onClose: {
       description: 'Callback when toast is dismissed',
       table: {
         type: { summary: '() => void' },
       },
-    },
-    className: {
-      control: 'text',
-      description: 'Additional CSS classes',
-      table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: "''" },
-      },
+      action: 'onClose',
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof Toast>;
+type Story = StoryObj<ToastProps>;
 
 // Success toast
 export const Success: Story = {
   args: {
     message: 'Great job! You won the game!',
     type: 'success',
-    visible: true,
+    duration: 3000,
+    onClose: () => {},
   },
   parameters: {
     docs: {
       description: {
-        story: 'Success toast notification for winning the game.',
+        story: 'Success toast notification with checkmark icon, typically used for game completion or correct guesses.',
       },
     },
   },
@@ -82,12 +79,13 @@ export const Error: Story = {
   args: {
     message: 'Not enough letters',
     type: 'error',
-    visible: true,
+    duration: 3000,
+    onClose: () => {},
   },
   parameters: {
     docs: {
       description: {
-        story: 'Error toast notification for invalid input.',
+        story: 'Error toast notification with X icon, used for invalid inputs or game rule violations.',
       },
     },
   },
@@ -98,44 +96,64 @@ export const Info: Story = {
   args: {
     message: 'Game started! Good luck!',
     type: 'info',
-    visible: true,
+    duration: 3000,
+    onClose: () => {},
   },
   parameters: {
     docs: {
       description: {
-        story: 'Info toast notification for game status.',
+        story: 'Info toast notification with information icon, used for game status updates and hints.',
       },
     },
   },
 };
 
-// Warning toast
-export const Warning: Story = {
+// Quick toast
+export const QuickDismiss: Story = {
   args: {
-    message: 'Word not in dictionary',
-    type: 'warning',
-    visible: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Warning toast notification for invalid word.',
-      },
-    },
-  },
-};
-
-// Hidden toast
-export const Hidden: Story = {
-  args: {
-    message: 'This toast is hidden',
+    message: 'This message will disappear quickly',
     type: 'info',
-    visible: false,
+    duration: 1000,
+    onClose: () => {},
   },
   parameters: {
     docs: {
       description: {
-        story: 'Hidden toast state.',
+        story: 'Toast with shorter duration for quick feedback messages.',
+      },
+    },
+  },
+};
+
+// Long toast
+export const LongDuration: Story = {
+  args: {
+    message: 'This is an important message that stays longer',
+    type: 'info',
+    duration: 5000,
+    onClose: () => {},
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Toast with longer duration for important messages that need more reading time.',
+      },
+    },
+  },
+};
+
+// Long message
+export const LongMessage: Story = {
+  args: {
+    message: 'This is a very long message that demonstrates how the toast component handles multiple lines of text and ensures proper wrapping.',
+    type: 'info',
+    duration: 4000,
+    onClose: () => {},
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Toast with a long message to demonstrate text wrapping behavior.',
       },
     },
   },
@@ -144,15 +162,16 @@ export const Hidden: Story = {
 // Dark theme
 export const DarkTheme: Story = {
   args: {
-    message: 'Toast in dark theme',
+    message: 'Dark theme toast message',
     type: 'success',
-    visible: true,
+    duration: 3000,
+    onClose: () => {},
   },
   parameters: {
     backgrounds: { default: 'dark' },
     docs: {
       description: {
-        story: 'Toast notification appearance in dark theme.',
+        story: 'Toast appearance in dark theme.',
       },
     },
   },

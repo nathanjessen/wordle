@@ -2,12 +2,18 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Statistics } from './Statistics';
 
 const withLocalStorage = (Story: any, context: any) => {
+  // Convert distribution object to array of length 6
+  const distributionArray = Array(6).fill(0);
+  Object.entries(context.args.distribution).forEach(([key, value]) => {
+    distributionArray[parseInt(key) - 1] = value as number;
+  });
+
   const stats = {
     gamesPlayed: context.args.gamesPlayed,
     gamesWon: context.args.gamesWon,
     currentStreak: context.args.currentStreak,
     maxStreak: context.args.maxStreak,
-    guessDistribution: Object.entries(context.args.distribution).map(([key, value]) => value),
+    guessDistribution: distributionArray,
   };
 
   localStorage.setItem('gameStats', JSON.stringify(stats));
