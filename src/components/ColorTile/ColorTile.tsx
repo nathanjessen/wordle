@@ -14,7 +14,7 @@ export const ColorTile = ({
     warning: 'bg-wordle-present text-white border-wordle-present',
     info: 'bg-wordle-correct text-white border-wordle-correct opacity-50',
     neutral: 'bg-wordle-absent text-white border-wordle-absent',
-    base: 'bg-white text-black border-wordle-tile-border',
+    base: 'bg-white dark:bg-dark-bg-secondary text-gray-900 dark:text-dark-text-primary border-wordle-tile-border dark:border-dark-tile-border',
   };
 
   return (
