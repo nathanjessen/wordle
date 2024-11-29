@@ -1272,6 +1272,21 @@ video {
   border-color: rgb(40 44 52 / var(--tw-border-opacity, 1));
 }
 
+.dark\:border-wordle-absent-dark:is(.dark *) {
+  --tw-border-opacity: 1;
+  border-color: rgb(58 65 73 / var(--tw-border-opacity, 1));
+}
+
+.dark\:border-wordle-correct-dark:is(.dark *) {
+  --tw-border-opacity: 1;
+  border-color: rgb(74 127 70 / var(--tw-border-opacity, 1));
+}
+
+.dark\:border-wordle-present-dark:is(.dark *) {
+  --tw-border-opacity: 1;
+  border-color: rgb(181 148 70 / var(--tw-border-opacity, 1));
+}
+
 .dark\:bg-dark-bg-primary:is(.dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(17 19 23 / var(--tw-bg-opacity, 1));
@@ -1290,6 +1305,21 @@ video {
 .dark\:bg-dark-button-primary:is(.dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(74 127 70 / var(--tw-bg-opacity, 1));
+}
+
+.dark\:bg-wordle-absent-dark:is(.dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(58 65 73 / var(--tw-bg-opacity, 1));
+}
+
+.dark\:bg-wordle-correct-dark:is(.dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 127 70 / var(--tw-bg-opacity, 1));
+}
+
+.dark\:bg-wordle-present-dark:is(.dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(181 148 70 / var(--tw-bg-opacity, 1));
 }
 
 .dark\:text-dark-text-primary:is(.dark *) {
