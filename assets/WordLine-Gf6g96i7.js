@@ -1,4 +1,4 @@
-import{j as a}from"./jsx-runtime-CkxqCPlQ.js";import{C as t}from"./ColorTile-r3Qg_vxC.js";const d=({items:l=[],length:n,className:s="",style:o})=>{const i=n-l.length;return a.jsxs("div",{className:`flex gap-2 ${s}`,style:o,children:[l.map((e,r)=>a.jsx(t,{color:e==null?void 0:e.color,className:`w-14 h-14 text-2xl font-bold border-2 
+import{j as a}from"./jsx-runtime-CkxqCPlQ.js";import{C as t}from"./ColorTile-CB4WjyZ3.js";const d=({items:l=[],length:n,className:s="",style:o})=>{const i=n-l.length;return a.jsxs("div",{className:`flex gap-2 ${s}`,style:o,children:[l.map((e,r)=>a.jsx(t,{color:e==null?void 0:e.color,className:`w-14 h-14 text-2xl font-bold border-2 
                     bg-light-tile-bg dark:bg-dark-bg-secondary
                     border-light-tile-border dark:border-dark-tile-border
                     text-light-text-primary dark:text-dark-text-primary`,children:e==null?void 0:e.char},r)),[...Array(i)].map((e,r)=>a.jsx(t,{className:`w-14 h-14 text-2xl font-bold border-2

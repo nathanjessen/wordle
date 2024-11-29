@@ -1,0 +1,9 @@
+import{j as a}from"./jsx-runtime-CkxqCPlQ.js";const p=({value:r,onChange:n,onSubmit:t,maxLength:o=5,disabled:s=!1,className:d=""})=>{const i=e=>{const l=e.target.value.toUpperCase();n(l)},u=e=>{e.key==="Enter"&&r.trim()&&t&&t()};return a.jsx("div",{className:"flex justify-center",children:a.jsx("input",{type:"text",value:r,onChange:i,onKeyDown:u,disabled:s,maxLength:o,placeholder:"TYPE YOUR GUESS",className:`w-full max-w-xs px-4 py-3 text-lg text-center uppercase rounded-lg 
+                  bg-light-bg-secondary dark:bg-dark-bg-secondary
+                  text-light-text-primary dark:text-dark-text-primary
+                  border-2 border-[#d4c5b3] dark:border-dark-border
+                  focus:outline-none focus:ring-2 focus:ring-light-button-primary dark:focus:ring-dark-button-primary
+                  focus:border-light-button-primary dark:focus:border-dark-button-primary
+                  disabled:opacity-50 disabled:cursor-not-allowed
+                  placeholder:text-light-text-secondary dark:placeholder:text-dark-text-secondary
+                  transition-colors duration-200 ${d}`.trim()})})};p.__docgenInfo={description:"",methods:[],displayName:"WordInput",props:{value:{required:!0,tsType:{name:"string"},description:""},onChange:{required:!0,tsType:{name:"signature",type:"function",raw:"(value: string) => void",signature:{arguments:[{type:{name:"string"},name:"value"}],return:{name:"void"}}},description:""},onSubmit:{required:!1,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},maxLength:{required:!1,tsType:{name:"number"},description:"",defaultValue:{value:"5",computed:!1}},disabled:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},className:{required:!1,tsType:{name:"string"},description:"",defaultValue:{value:"''",computed:!1}}}};export{p as W};
