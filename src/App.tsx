@@ -14,7 +14,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-dark-bg-primary text-gray-900 dark:text-dark-text-primary">
+    <div className="min-h-screen bg-light-bg-primary dark:bg-dark-bg-primary text-light-text-primary dark:text-dark-text-primary">
       <GamePage />
     </div>
   );
