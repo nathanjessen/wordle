@@ -1,17 +1,30 @@
-import { useState, KeyboardEvent } from 'react';
+import { KeyboardEvent, ChangeEvent } from 'react';
 
 export interface IWordInput {
-  onGuess: (guess: string) => void;
+  value: string;
+  onChange: (value: string) => void;
+  onSubmit?: () => void;
+  maxLength?: number;
   disabled?: boolean;
+  className?: string;
 }
 
-export const WordInput = ({ onGuess, disabled = false }: IWordInput) => {
-  const [value, setValue] = useState('');
+export const WordInput = ({
+  value,
+  onChange,
+  onSubmit,
+  maxLength = 5,
+  disabled = false,
+  className = '',
+}: IWordInput) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value.toUpperCase();
+    onChange(newValue);
+  };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && value.trim()) {
-      onGuess(value.trim().toLowerCase());
-      setValue('');
+    if (event.key === 'Enter' && value.trim() && onSubmit) {
+      onSubmit();
     }
   };
 
@@ -20,11 +33,12 @@ export const WordInput = ({ onGuess, disabled = false }: IWordInput) => {
       <input
         type="text"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
         onKeyDown={handleKeyDown}
         disabled={disabled}
-        placeholder="Type your guess"
-        className="w-full max-w-xs px-4 py-3 text-lg text-center rounded-lg 
+        maxLength={maxLength}
+        placeholder="TYPE YOUR GUESS"
+        className={`w-full max-w-xs px-4 py-3 text-lg text-center uppercase rounded-lg 
                   bg-light-bg-secondary dark:bg-dark-bg-secondary
                   text-light-text-primary dark:text-dark-text-primary
                   border-2 border-[#d4c5b3] dark:border-dark-border
@@ -32,7 +46,7 @@ export const WordInput = ({ onGuess, disabled = false }: IWordInput) => {
                   focus:border-light-button-primary dark:focus:border-dark-button-primary
                   disabled:opacity-50 disabled:cursor-not-allowed
                   placeholder:text-light-text-secondary dark:placeholder:text-dark-text-secondary
-                  transition-colors duration-200"
+                  transition-colors duration-200 ${className}`.trim()}
       />
     </div>
   );

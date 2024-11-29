@@ -249,7 +249,13 @@ export const GamePage = () => {
           
           <div className='space-y-8'>
             <WordInput
-              onGuess={(val) => onGuess(val)}
+              value={guess}
+              onChange={setGuess}
+              onSubmit={() => {
+                onGuess(guess);
+                setGuess('');
+              }}
+              maxLength={wordLen}
               disabled={isGameComplete}
             />
 

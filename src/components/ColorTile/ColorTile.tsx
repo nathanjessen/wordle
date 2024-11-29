@@ -14,10 +14,10 @@ export const ColorTile = ({
   style,
 }: PropsWithChildren<IColorTile>) => {
   const colors: { [key: string]: string } = {
-    success: 'bg-wordle-correct text-white border-wordle-correct',
-    warning: 'bg-wordle-present text-white border-wordle-present',
-    info: 'bg-wordle-correct text-white border-wordle-correct opacity-50',
-    neutral: 'bg-wordle-absent text-white border-wordle-absent',
+    success: 'bg-wordle-correct text-white border-wordle-correct dark:bg-wordle-correct-dark dark:border-wordle-correct-dark',
+    warning: 'bg-wordle-present text-white border-wordle-present dark:bg-wordle-present-dark dark:border-wordle-present-dark',
+    info: 'bg-wordle-correct text-white border-wordle-correct opacity-50 dark:bg-wordle-correct-dark dark:border-wordle-correct-dark',
+    neutral: 'bg-wordle-absent text-white border-wordle-absent dark:bg-wordle-absent-dark dark:border-wordle-absent-dark',
     base: 'bg-white dark:bg-dark-bg-secondary text-gray-900 dark:text-dark-text-primary border-wordle-tile-border dark:border-dark-tile-border',
   };
 
